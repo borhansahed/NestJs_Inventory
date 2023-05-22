@@ -8,6 +8,13 @@ import { User } from './user/entities/user.entity';
 import { OrderModule } from './order/order.module';
 import { ConfigModule } from '@nestjs/config';
 import { Product } from './product/entities/product.entity';
+import { AdminModule } from './admin/admin.module';
+import { OrderMiddleWare } from './middleware/order.middleware';
+import { OrderController } from './order/order.controller';
+import { CheckUserMiddleware } from './middleware/checkUser.middieware';
+import { ProductService } from './product/product.service';
+import { UserService } from './user/user.service';
+import { Order } from './order/entities/order.entity';
 
 @Module({
   imports: [
@@ -21,19 +28,16 @@ import { Product } from './product/entities/product.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: 'test',
-      entities: [User, Product],
+      entities: [User, Product, Order],
       logging: true,
       synchronize: true,
     }),
     UserModule,
     ProductModule,
     OrderModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  // configure(consumer: MiddlewareConsumer) {
-  //   consumer.apply(CheckUserMiddleware).forRoutes('product');
-  // }
-}
+export class AppModule {}

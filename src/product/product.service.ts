@@ -18,6 +18,9 @@ export class ProductService {
   findAll(): Promise<Product[]> {
     return this.productRepo.find();
   }
+  findOne(id: number): Promise<Product> {
+    return this.productRepo.findOne({ where: { id: id } });
+  }
 
   remove(id: number) {
     return this.productRepo.delete(id);

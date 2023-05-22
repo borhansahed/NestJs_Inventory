@@ -19,12 +19,8 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  findByEmail(id: string) {
+    return this.userRepository.findOne({ where: { email: id } });
   }
 
   remove(id: number) {
